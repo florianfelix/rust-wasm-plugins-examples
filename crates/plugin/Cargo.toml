@@ -17,7 +17,7 @@ categories = ["wasm"]
 keywords = ["wasm", "wasi", "wit", "wasmtime", "examples"]
 
 [dependencies]
-wit-bindgen = "0.41.0"
+wit-bindgen = "0.43.0"
 
 [lib]
 crate-type = ["cdylib"]

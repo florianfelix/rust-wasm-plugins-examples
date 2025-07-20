@@ -1,3 +1,5 @@
+use wasmtime_wasi::p2::add_to_linker_sync;
+
 use super::{bindings, host::*};
 
 use {
@@ -33,8 +35,9 @@ impl Prettify {
 
         // Linker
         let mut linker = Linker::new(&engine);
-        wasmtime_wasi::add_to_linker_sync(&mut linker).context("link WASI")?;
-        bindings::Prettify::add_to_linker(&mut linker, |state: &mut Host| state).context("link plugin host")?;
+        add_to_linker_sync(&mut linker).context("link WASI")?;
+        bindings::Prettify::add_to_linker::<_, HasSelf<_>>(&mut linker, |state: &mut Host| state)
+            .context("link plugin host")?;
 
         // Store
         let mut store = Store::new(&engine, Host::new());

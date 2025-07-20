@@ -1,12 +1,16 @@
 use super::bindings::acme::plugins::host;
 
-use wasmtime_wasi::{IoView, ResourceTable, WasiCtx, WasiCtxBuilder, WasiView};
+use wasmtime_wasi::{
+    p2::{IoView, WasiCtx, WasiCtxBuilder, WasiView},
+    ResourceTable,
+};
 
 //
 // Host
 //
 
 /// Plugins host.
+#[derive()]
 pub struct Host {
     wasi: WasiCtx,
     resources: ResourceTable,
